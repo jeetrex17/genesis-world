@@ -163,10 +163,11 @@ def compose_inertial_from_g_infos(g_infos: Sequence[dict], rho: float) -> Inerti
 
 
 class LinkInertial(NamedTuple):
-    """A link's (or variant's) finalized inertial in the solver's representation: mass, center of mass 'com', and the
-    inertia tensor 'inertia' expressed in the principal frame 'quat' (identity when derived from geometry). Distinct
-    from 'InertialProperties', whose 'i' is a single tensor; the solver stores the principal tensor and its orientation
-    separately."""
+    """A link's (or variant's) finalized inertial in the solver's representation: mass, center of mass 'com',
+    inertial-frame orientation 'quat', and inertia tensor 'inertia' expressed in that frame. A fixed child whose
+    dynamics are folded into an aligned root retains 'com' and 'quat' to define its public 'link_COM' frame while its
+    inertia is zero. Distinct from 'InertialProperties', whose 'i' is a single tensor; the solver stores the tensor and
+    its orientation separately."""
 
     mass: float
     com: Vec3FType
